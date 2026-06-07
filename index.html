@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Tamanna! ❤️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --rose-crimson: #a8233c;
+            --rose-pink: #ff758c;
+            --soft-cream: #fff5f6;
+            --text-dark: #2c1a1d;
+            --pastel-heart: #ffe3e7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Georgia', serif;
+        }
+
+        body {
+            background-color: var(--soft-cream);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Quiz Overlay Screen */
+        #quizOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--soft-cream);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .quiz-box {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(168, 35, 60, 0.1);
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .quiz-btn {
+            background: white;
+            border: 2px solid var(--rose-pink);
+            color: var(--text-dark);
+            padding: 12px 20px;
+            margin: 10px 0;
+            width: 100%;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .quiz-btn:hover {
+            background: var(--rose-pink);
+            color: white;
+        }
+
+        /* Cursor Trail */
+        .cursor-sparkle {
+            position: fixed;
+            pointer-events: none;
+            color: var(--rose-pink);
+            font-size: 10px;
+            z-index: 9999;
+            animation: particleFade 1s forwards ease-out;
+        }
+
+        /* Music Control */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 12px;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(168, 35, 60, 0.2);
+            cursor: pointer;
+            z-index: 100;
+            color: var(--rose-crimson);
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        .music-control.playing { animation: spin 4s linear infinite; }
+
+        header { padding: 60px 20px 20px; }
+        h1 { color: var(--rose-crimson); font-size: 2.5rem; margin-bottom: 10px; }
+        .nickname-banner { font-style: italic; color: #614045; font-size: 1.1rem; margin-bottom: 25px; }
+
+        /* Countdown */
+        .countdown-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            max-width: 450px;
+            margin: 0 auto 40px;
+        }
+        .time-card {
+            background: white;
+            padding: 15px 10px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(168, 35, 60, 0.08);
+            flex: 1;
+            border-bottom: 4px solid var(--rose-crimson);
+        }
+        .time-card span { display: block; font-size: 1.8rem; font-weight: bold; color: var(--rose-crimson); }
+        .time-card label { font-size: 0.75rem; text-transform: uppercase; color: #8c7679; }
+
+        /* Journey Milestones */
+        .milestone-section {
+            background: white;
+            max-width: 650px;
+            margin: 20px auto 40px;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(168, 35, 60, 0.04);
+        }
+        .milestone-grid { display: flex; justify-content: space-around; margin-top: 15px; }
+        .milestone-item h4 { font-size: 1.6rem; color: var(--rose-crimson); }
+        .milestone-item p { font-size: 0.85rem; color: #7a6366; }
+
+        /* Polaroid Gallery */
+        .gallery-container {
+            padding: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 1000px; margin: 0 auto 50px;
+        }
+        .polaroid {
+            background: white; padding: 15px 15px 30px 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transform: rotate(var(--angle)); transition: transform 0.4s, box-shadow 0.4s; width: 280px; border-radius: 2px;
+        }
+        .polaroid:hover { transform: scale(1.05) rotate(0deg); box-shadow: 0 15px 35px rgba(168, 35, 60, 0.15); z-index: 10; }
+        .polaroid img { width: 100%; height: 320px; object-fit: cover; border: 1px solid #eee; }
+        .polaroid .caption { margin-top: 15px; font-size: 1.1rem; color: #4a3b3d; }
+
+        /* Heart Cards Grid */
+        .reasons-title { color: var(--rose-crimson); margin: 40px 0 15px; font-size: 1.6rem; }
+        .reasons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; max-width: 600px; margin: 0 auto 50px; padding: 0 20px; }
+        .reason-heart-card {
+            background: white; border-radius: 15px; padding: 20px 10px; cursor: pointer; box-shadow: 0 6px 15px rgba(168, 35, 60, 0.05);
+            transition: transform 0.3s, background-color 0.3s; border: 1px solid var(--pastel-heart); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 120px;
+        }
+        .reason-heart-card i { color: var(--rose-pink); font-size: 1.5rem; margin-bottom: 8px; }
+        .reason-text { font-size: 0.95rem; color: #555; font-weight: bold; }
+
+        /* Love Timeline */
+        .timeline-container { max-width: 550px; margin: 40px auto; padding: 0 20px; text-align: left; position: relative; }
+        .timeline-container::before {
+            content: ''; position: absolute; left: 30px; top: 10px; bottom: 10px; width: 3px; background: var(--pastel-heart);
+        }
+        .timeline-item { position: relative; margin-bottom: 30px; padding-left: 50px; }
+        .timeline-dot {
+            position: absolute; left: 22px; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: var(--rose-pink); border: 3px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .timeline-content h4 { color: var(--rose-crimson); font-size: 1.1rem; margin-bottom: 3px; }
+        .timeline-content p { color: #555; font-size: 0.95rem; }
+
+        /* Cake Section */
+        .cake-section { background: white; max-width: 550px; margin: 40px auto; padding: 40px 20px; border-radius: 24px; box-shadow: 0 10px 30px rgba(168, 35, 60, 0.06); border: 1px solid #ffe3e7; position: relative; }
+        .cake-container { position: relative; width: 120px; height: 120px; margin: 0 auto 20px; cursor: pointer; }
+        .candle { position: absolute; bottom: 70px; left: 50%; transform: translateX(-50%); width: 8px; height: 40px; background: linear-gradient(to top, #ff758c, #ff758c 50%, #fff 50%, #fff); background-size: 100% 20px; border-radius: 4px; }
+        .flame { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 12px; height: 20px; background: #ff9d00; border-radius: 50% 50% 20% 20%; box-shadow: 0 0 10px #ff9d00; animation: flicker 0.6s infinite alternate; }
+        .cake-base { position: absolute; bottom: 10px; left: 10px; width: 100px; height: 60px; background: #f4a261; border-radius: 10px 10px 4px 4px; }
+        .cake-base::after { content: ''; position: absolute; top: 15px; left: 0; width: 100%; height: 15px; background: var(--rose-crimson); }
+
+        /* Cartoon Scenes */
+        .cartoon-scene { display: none; width: 100%; height: 200px; position: relative; margin-top: 20px; overflow: hidden; }
+        .character { position: absolute; bottom: 10px; width: 80px; height: 130px; transition: all 0.5s ease; }
+        .char-ajay { left: 15%; } .char-tamanna { right: 15%; }
+        .avatar-circle { width: 75px; height: 75px; border-radius: 50%; border: 3px solid var(--rose-pink); background-size: cover; background-position: center; position: absolute; top: 0; left: 2px; }
+        .char-label { position: absolute; bottom: 5px; width: 100%; font-size: 0.85rem; font-weight: bold; background: rgba(255,255,255,0.9); border-radius: 10px; padding: 2px 0; border: 1px solid #ffd3d8; }
+        .feeding-slice { position: absolute; width: 25px; height: 20px; background: #f4a261; border-top: 5px solid var(--rose-crimson); clip-path: polygon(0% 100%, 100% 100%, 50% 0%); left: 30%; bottom: 60px; display: none; z-index: 5; }
+        .action-btn { display: none; background: var(--rose-crimson); color: white; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; font-weight: bold; margin: 20px auto 0; box-shadow: 0 4px 10px rgba(168, 35, 60, 0.3); font-size: 1rem; }
+
+        /* Love Letter */
+        .letter-card { display: none; max-width: 500px; background: #fffdfd; margin: 30px auto 60px; padding: 40px 30px; border-radius: 20px; border-left: 5px solid var(--rose-crimson); box-shadow: 0 12px 40px rgba(0,0,0,0.06); text-align: left; line-height: 1.8; font-size: 1.1rem; animation: unfold 1.2s ease-out forwards; }
+
+        /* Keyframes */
+        @keyframes flicker { 0% { transform: translateX(-50%) scale(1); } 100% { transform: translateX(-50%) scale(1.1) rotate(3deg); } }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes unfold { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes feedAction { 0% { left: 30%; bottom: 60px; transform: scale(1); } 50% { left: 68%; bottom: 90px; transform: scale(1.3) rotate(15deg); } 100% { left: 68%; bottom: 90px; transform: scale(0); opacity: 0; } }
+        @keyframes particleFade { 0% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-20px) scale(0.6); } }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; } .polaroid { width: 90%; } .milestone-grid { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="quizOverlay">
+        <div class="quiz-box">
+            <h2 style="color: var(--rose-crimson); margin-bottom: 15px;">Hey Cutie! 💕</h2>
+            <p style="margin-bottom: 25px; font-size: 1.05rem; line-height: 1.5;">Before entering your birthday surprise area, answer this simple question to verify it's you:</p>
+            <h3 style="margin-bottom: 20px; color: #4a3b3d;">When did we kiss for the first time? 💋</h3>
+            <button class="quiz-btn" onclick="wrongAnswer()">12th August 2025</button>
+            <button class="quiz-btn" onclick="correctAnswer()">17th October 2025 ❤️</button>
+            <button class="quiz-btn" onclick="wrongAnswer()">24th November 2025</button>
+        </div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <div class="music-control" onclick="toggleMusic()" id="musicBtn">
+        <i class="fa-solid fa-cake-candles"></i>
+        <audio id="bgSong" loop src="https://actions.google.com/sounds/v1/celebrations/music_box_happy_birthday.ogg"></audio>
+    </div>
+
+    <header>
+        <h1 id="headline">Counting down for Tamanna... ⌛</h1>
+        <div class="nickname-banner">Our 1 Year of Beautiful Memories Together ❤️</div>
+    </header>
+
+    <div class="countdown-wrapper" id="timerSection">
+        <div class="time-card"><span id="days">00</span><label>Days</label></div>
+        <div class="time-card"><span id="hours">00</span><label>Hours</label></div>
+        <div class="time-card"><span id="mins">00</span><label>Mins</label></div>
+        <div class="time-card"><span id="secs">00</span><label>Secs</label></div>
+    </div>
+
+    <div class="milestone-section">
+        <h3 style="color: var(--rose-crimson);">Loving You In Numbers 📊</h3>
+        <div class="milestone-grid">
+            <div class="milestone-item"><h4>1</h4><p>Beautiful Year</p></div>
+            <div class="milestone-item"><h4>12</h4><p>Happy Months</p></div>
+            <div class="milestone-item"><h4>365</h4><p>Lovely Days</p></div>
+            <div class="milestone-item"><h4>8760</h4><p>Precious Hours</p></div>
+        </div>
+    </div>
+
+    <div class="gallery-container">
+        <div class="polaroid" style="--angle: -3deg;"><img src="51940.jpg" alt="Us"><div class="caption">The prettiest view in the world 😍</div></div>
+        <div class="polaroid" style="--angle: 2deg;"><img src="51941.jpg" alt="Safe Place"><div class="caption">My safest place is right here. 💝</div></div>
+        <div class="polaroid" style="--angle: -2deg;"><img src="51942.jpg" alt="Her Smile"><div class="caption">That smile completely melts me... 🌊</div></div>
+        <div class="polaroid" style="--angle: 4deg;"><img src="51943.jpg" alt="Sunset"><div class="caption">Sunset looks prettier with you. ✨</div></div>
+    </div>
+
+    <h3 class="reasons-title">Tap each heart, Baccha... 👇</h3>
+    <div class="reasons-grid">
+        <div class="reason-heart-card" onclick="revealReason(this, 'Your absolute cuteness that brightens my entire day!')"><i class="fa-solid fa-heart"></i><span class="reason-text">Reason 1</span></div>
+        <div class="reason-heart-card" onclick="revealReason(this, 'How unbelievably beautiful you look every single moment.')"><i class="fa-solid fa-heart"></i><span class="reason-text">Reason 2</span></div>
+        <div class="reason-heart-card" onclick="revealReason(this, 'The infinite fun and pure comfort I feel when you are around me.')"><i class="fa-solid fa-heart"></i><span class="reason-text">Reason 3</span></div>
+    </div>
+
+    <div class="timeline-container">
+        <h3 style="color: var(--rose-crimson); text-align: center; margin-bottom: 25px;">Our Journey Highlights ✨</h3>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content"><h4>The First Hello 👋</h4><p>When our beautiful 1-year journey began, adding endless sweetness to my world.</p></div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content"><h4>Endless Inside Jokes 😂</h4><p>Nicknaming you my cutiepie, motu, and mogli, and realizing how incredibly fun life is with you.</p></div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content"><h4>Chasing Sunsets Together 🌊</h4><p>Standing side-by-side watching the sun slide down over the water, holding you close.</p></div>
+        </div>
+    </div>
+
+    <div class="cake-section" id="cakeArea">
+        <div id="cakePrompt">
+            <h3 style="margin-bottom: 15px; color: var(--rose-crimson);">Make a Wish, Baccha! 🎂</h3>
+            <p style="font-size: 0.95rem; color: #666; margin-bottom: 25px;">Tap the candle flame to blow it out and cut the cake!</p>
+            <div class="cake-container" onclick="blowCandle()">
+                <div class="candle" id="candleStash"><div class="flame" id="cakeFlame"></div></div>
+                <div class="cake-base"></div>
+            </div>
+        </div>
+
+        <div class="cartoon-scene" id="cartoonStage">
+            <div class="feeding-slice" id="cakeSlice"></div>
+            <div class="character char-ajay"><div class="avatar-circle" style="background-image: url('51941.jpg');"></div><div class="char-label">Ajay 😎</div></div>
+            <div class="character char-tamanna" id="tamannaChar"><div class="avatar-circle" style="background-image: url('51942.jpg');"></div><div class="char-label">Tamanna 🥰</div></div>
+        </div>
+        <button class="action-btn" id="feedBtn" onclick="feedCakeAction()">Feed Slice to Motu! 🍰</button>
+    </div>
+
+    <div class="letter-card" id="loveLetter">
+        <p><strong>Dear Tamanna Nainani,</strong></p><br>
+        <p>Happy Birthday to the Love of my Life! 💞🎂</p>
+        <p>You are my <em>baccha</em>, <em>cutiepie</em>, <em>motu</em>, and <em>mogli</em>, and I am so deeply grateful to have you in my life. Being around you brings out all the fun, joy, and laughter in my world. You are so beautiful, both inside and out.</p>
+        <p>You bring an irreplaceable warmth and sweetness into my life. Every single moment shared with you over this past year has become precious to me.</p>
+        <p>On your special day, I wish you all the happiness, love, and joy that you truly deserve. May this coming year bring you countless beautiful moments and wonderful new memories.</p><br>
+        <p style="text-align: right;"><strong>With love and best wishes,</strong><br>Ajay Bathani 💝</p>
+    </div>
+
+    <script>
+        const targetBirthday = new Date("June 12, 2026 00:00:00").getTime();
+
+        function runCountdown() {
+            const rightNow = new Date().getTime(); const gap = targetBirthday - rightNow;
+            if (gap <= 0) { document.getElementById("headline").innerText = "🎉 Happy Birthday, Tamanna! 🎂"; document.getElementById("timerSection").style.display = "none"; return; }
+            const days = Math.floor(gap / (1000 * 60 * 60 * 24)); const hours = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); const mins = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60)); const secs = Math.floor((gap % (1000 * 60)) / 1000);
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days; document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours; document.getElementById("mins").innerText = mins < 10 ? "0" + mins : mins; document.getElementById("secs").innerText = secs < 10 ? "0" + secs : secs;
+        }
+        setInterval(runCountdown, 1000);
+
+        // Quiz Logic
+        function wrongAnswer() { alert("Wrong choice, Motu! How can you forget the date of our first kiss? Try again! 😂❤️"); }
+        function correctAnswer() {
+            alert("Correct Answer, Baccha! Welcome to your page. 🥰");
+            document.getElementById("quizOverlay").style.display = "none";
+            toggleMusic(); // Autoplays romantic music on validation!
+        }
+
+        function revealReason(element, message) {
+            element.style.transform = "rotateY(360deg)"; element.style.backgroundColor = "#fff0f2";
+            const icon = element.querySelector('i'); icon.className = "fa-solid fa-heart-crack"; icon.style.transform = "scale(1.2)";
+            const label = element.querySelector('.reason-text'); label.innerText = message; label.style.fontSize = "0.8rem";
+            triggerConfettiBurst();
+        }
+
+        window.addEventListener('mousemove', function(e) {
+            if(Math.random() > 0.85) {
+                const sparkle = document.createElement('div'); sparkle.className = 'cursor-sparkle'; sparkle.innerHTML = '❤️';
+                sparkle.style.left = e.clientX + 'px'; sparkle.style.top = e.clientY + 'px';
+                document.body.appendChild(sparkle); setTimeout(() => sparkle.remove(), 1000);
+            }
+        });
+
+        // Touch trail addition for mobile devices
+        window.addEventListener('touchmove', function(e) {
+            if(Math.random() > 0.85) {
+                const sparkle = document.createElement('div'); sparkle.className = 'cursor-sparkle'; sparkle.innerHTML = '❤️';
+                sparkle.style.left = e.touches[0].clientX + 'px'; sparkle.style.top = e.touches[0].clientY + 'px';
+                document.body.appendChild(sparkle); setTimeout(() => sparkle.remove(), 1000);
+            }
+        });
+
+        function toggleMusic() {
+            const song = document.getElementById("bgSong"); const btn = document.getElementById("musicBtn");
+            if(song.paused) { song.play().catch(e => console.log("Audio block context.")); btn.classList.add("playing"); } else { song.pause(); btn.classList.remove("playing"); }
+        }
+
+        function blowCandle() {
+            const flame = document.getElementById("cakeFlame");
+            if(flame.style.display !== "none") {
+                flame.style.display = "none"; triggerConfettiBurst();
+                setTimeout(() => { document.getElementById("cakePrompt").style.display = "none"; document.getElementById("cartoonStage").style.display = "block"; document.getElementById("feedBtn").style.display = "block"; document.getElementById("cakeSlice").style.display = "block"; }, 600);
+            }
+        }
+
+        function feedCakeAction() {
+            const slice = document.getElementById("cakeSlice"); const tamanna = document.getElementById("tamannaChar"); const feedButton = document.getElementById("feedBtn");
+            slice.style.animation = "feedAction 1.5s forwards ease-in-out";
+            setTimeout(() => { tamanna.style.transform = "scale(1.2)"; triggerConfettiBurst(); }, 750);
+            setTimeout(() => { tamanna.style.transform = "scale(1)"; feedButton.style.display = "none"; document.getElementById("loveLetter").style.display = "block"; document.getElementById("loveLetter").scrollIntoView({ behavior: 'smooth' }); }, 1600);
+        }
+
+        // Particle Canvas
+        const canvas = document.getElementById("canvas"); const ctx = canvas.getContext("2d"); let activeParticles = [];
+        function resizeStage() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener("resize", resizeStage); resizeStage();
+
+        class ElegantParticle {
+            constructor(x, y, scale, speedX, speedY, type, alpha) { this.x = x; this.y = y; this.scale = scale; this.speedX = speedX; this.speedY = speedY; this.type = type; this.alpha = alpha; this.rotation = Math.random() * 360; this.rotSpeed = (Math.random() - 0.5) * 2; }
+            update() { this.x += this.speedX; this.y += this.speedY; this.rotation += this.rotSpeed; if (this.alpha > 0.008) this.alpha -= 0.003; }
+            draw() {
+                ctx.save(); ctx.globalAlpha = this.alpha; ctx.translate(this.x, this.y); ctx.rotate((this.rotation * Math.PI) / 180); ctx.fillStyle = this.type === 0 ? "#a8233c" : "#ff758c"; ctx.beginPath();
+                if(this.type === 0) { ctx.ellipse(0, 0, this.scale, this.scale * 1.4, 0, 0, 2 * Math.PI); ctx.fill(); } else { ctx.moveTo(0, 0 + this.scale / 4); ctx.quadraticCurveTo(0, 0, 0 + this.scale / 2, 0); ctx.quadraticCurveTo(0 + this.scale, 0, 0 + this.scale, 0 + this.scale / 4); ctx.quadraticCurveTo(0 + this.scale, 0 + (this.scale * 5) / 8, 0 + this.scale / 2, 0 + this.scale); ctx.quadraticCurveTo(0, 0 + (this.scale * 5) / 8, 0, 0 + this.scale / 4); ctx.closePath(); ctx.fill(); }
+                ctx.restore();
+            }
+        }
+        function spawnAmbientElements() { if(activeParticles.length > 70) return; const size = Math.random() * 10 + 6; const targetX = Math.random() * canvas.width; activeParticles.push(new ElegantParticle(targetX, -20, size, (Math.random() - 0.5) * 1.5, Math.random() * 1 + 1, Math.floor(Math.random() * 2), Math.random() * 0.6 + 0.4)); }
+        setInterval(spawnAmbientElements, 350);
+        function triggerConfettiBurst() { for (let i = 0; i < 60; i++) { const size = Math.random() * 12 + 6; const midX = canvas.width / 2; const midY = canvas.height / 2 + 100; activeParticles.push(new ElegantParticle(midX, midY, size, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 10 - 4, Math.floor(Math.random() * 2), 1)); } }
+        function renderFrame() { ctx.clearRect(0, 0, canvas.width, canvas.height); activeParticles = activeParticles.filter(p => p.alpha > 0.01 && p.y < canvas.height + 40); activeParticles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(renderFrame); }
+        renderFrame();
+    </script>
+</body>
+</html>
