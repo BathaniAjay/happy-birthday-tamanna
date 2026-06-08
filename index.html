@@ -12,6 +12,7 @@
             --soft-cream: #fff5f6;
             --text-dark: #2c1a1d;
             --pastel-heart: #ffe3e7;
+            --royal-gold: #d4af37;
         }
 
         * {
@@ -28,24 +29,25 @@
             text-align: center;
         }
 
+        /* Canvas brought to the very top background layer */
         #canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 2001;
             pointer-events: none;
         }
 
-        /* Quiz Overlay Screen */
+        /* --- GRAND ROYAL ENTRY GATEWAY OVERLAY --- */
         #quizOverlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--soft-cream);
+            background: linear-gradient(135deg, #1c0206 0%, #3d0811 100%);
             z-index: 2000;
             display: flex;
             flex-direction: column;
@@ -54,35 +56,78 @@
             padding: 20px;
         }
 
-        .quiz-box {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(168, 35, 60, 0.1);
-            max-width: 450px;
+        .royal-card {
+            background: rgba(255, 245, 246, 0.95);
+            padding: 50px 35px;
+            border-radius: 30px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(212, 175, 55, 0.4);
+            max-width: 480px;
             width: 100%;
+            border: 3px double var(--royal-gold);
+            position: relative;
+            z-index: 2002;
+            animation: cardFloat 3s ease-in-out infinite alternate;
+        }
+
+        .crown-icon {
+            font-size: 3.5rem;
+            color: var(--royal-gold);
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+            animation: crownPulse 2s infinite alternate;
+        }
+
+        .royal-title {
+            font-size: 2rem;
+            color: var(--rose-crimson);
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .royal-subtitle {
+            font-size: 1.1rem;
+            color: #614045;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .quiz-prompt {
+            font-size: 1.15rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            line-height: 1.5;
+            border-top: 1px dashed var(--royal-gold);
+            border-bottom: 1px dashed var(--royal-gold);
+            padding: 15px 0;
         }
 
         .quiz-btn {
             background: white;
             border: 2px solid var(--rose-pink);
             color: var(--text-dark);
-            padding: 12px 20px;
-            margin: 10px 0;
+            padding: 14px 22px;
+            margin: 12px 0;
             width: 100%;
             border-radius: 50px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: bold;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         .quiz-btn:hover {
-            background: var(--rose-pink);
+            background: linear-gradient(135deg, var(--rose-crimson), var(--rose-pink));
             color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(168, 35, 60, 0.3);
         }
 
-        /* Cursor Trail */
+        /* Particles cursor trail tracking */
         .cursor-sparkle {
             position: fixed;
             pointer-events: none;
@@ -92,7 +137,7 @@
             animation: particleFade 1s forwards ease-out;
         }
 
-        /* Music Control */
+        /* Music Layer Control */
         .music-control {
             position: fixed;
             top: 20px;
@@ -132,7 +177,7 @@
         .time-card span { display: block; font-size: 1.8rem; font-weight: bold; color: var(--rose-crimson); }
         .time-card label { font-size: 0.75rem; text-transform: uppercase; color: #8c7679; }
 
-        /* Journey Milestones */
+        /* Journey Milestones counters */
         .milestone-section {
             background: white;
             max-width: 650px;
@@ -145,7 +190,7 @@
         .milestone-item h4 { font-size: 1.6rem; color: var(--rose-crimson); }
         .milestone-item p { font-size: 0.85rem; color: #7a6366; }
 
-        /* Polaroid Gallery */
+        /* Polaroid layout architecture */
         .gallery-container {
             padding: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 1000px; margin: 0 auto 50px;
         }
@@ -157,7 +202,7 @@
         .polaroid img { width: 100%; height: 320px; object-fit: cover; border: 1px solid #eee; }
         .polaroid .caption { margin-top: 15px; font-size: 1.1rem; color: #4a3b3d; }
 
-        /* Heart Cards Grid */
+        /* Heart Notes Structure */
         .reasons-title { color: var(--rose-crimson); margin: 40px 0 15px; font-size: 1.6rem; }
         .reasons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; max-width: 650px; margin: 0 auto 50px; padding: 0 20px; }
         .reason-heart-card {
@@ -167,7 +212,7 @@
         .reason-heart-card i { color: var(--rose-pink); font-size: 1.5rem; margin-bottom: 8px; }
         .reason-text { font-size: 0.95rem; color: #555; font-weight: bold; line-height: 1.4; }
 
-        /* Love Timeline */
+        /* Love Journey Map Timeline */
         .timeline-container { max-width: 550px; margin: 40px auto; padding: 0 20px; text-align: left; position: relative; }
         .timeline-container::before {
             content: ''; position: absolute; left: 30px; top: 10px; bottom: 10px; width: 3px; background: var(--pastel-heart);
@@ -179,7 +224,7 @@
         .timeline-content h4 { color: var(--rose-crimson); font-size: 1.1rem; margin-bottom: 5px; }
         .timeline-content p { color: #555; font-size: 0.95rem; line-height: 1.5; }
 
-        /* Cake Section */
+        /* Interactive Cake System styling */
         .cake-section { background: white; max-width: 550px; margin: 40px auto; padding: 40px 20px; border-radius: 24px; box-shadow: 0 10px 30px rgba(168, 35, 60, 0.06); border: 1px solid #ffe3e7; position: relative; }
         .cake-container { position: relative; width: 120px; height: 120px; margin: 0 auto 20px; cursor: pointer; }
         .candle { position: absolute; bottom: 70px; left: 50%; transform: translateX(-50%); width: 8px; height: 40px; background: linear-gradient(to top, #ff758c, #ff758c 50%, #fff 50%, #fff); background-size: 100% 20px; border-radius: 4px; }
@@ -196,10 +241,12 @@
         .feeding-slice { position: absolute; width: 25px; height: 20px; background: #f4a261; border-top: 5px solid var(--rose-crimson); clip-path: polygon(0% 100%, 100% 100%, 50% 0%); left: 30%; bottom: 60px; display: none; z-index: 5; }
         .action-btn { display: none; background: var(--rose-crimson); color: white; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; font-weight: bold; margin: 20px auto 0; box-shadow: 0 4px 10px rgba(168, 35, 60, 0.3); font-size: 1rem; }
 
-        /* Love Letter */
+        /* Grand Letter Box Layout */
         .letter-card { display: none; max-width: 500px; background: #fffdfd; margin: 30px auto 60px; padding: 40px 30px; border-radius: 20px; border-left: 5px solid var(--rose-crimson); box-shadow: 0 12px 40px rgba(0,0,0,0.06); text-align: left; line-height: 1.8; font-size: 1.1rem; animation: unfold 1.2s ease-out forwards; }
 
-        /* Keyframes */
+        /* Entry Keyframe Animations */
+        @keyframes cardFloat { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
+        @keyframes crownPulse { 0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(212,175,55,0.4)); } 100% { transform: scale(1.08); filter: drop-shadow(0 0 15px rgba(212,175,55,0.8)); } }
         @keyframes flicker { 0% { transform: translateX(-50%) scale(1); } 100% { transform: translateX(-50%) scale(1.1) rotate(3deg); } }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes unfold { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -208,23 +255,30 @@
 
         @media (max-width: 480px) {
             h1 { font-size: 2rem; } .polaroid { width: 90%; } .milestone-grid { flex-direction: column; gap: 15px; }
+            .royal-card { padding: 35px 20px; } .royal-title { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
 
+    <canvas id="canvas"></canvas>
+
     <div id="quizOverlay">
-        <div class="quiz-box">
-            <h2 style="color: var(--rose-crimson); margin-bottom: 15px;">Hey Cutie! 💕</h2>
-            <p style="margin-bottom: 25px; font-size: 1.05rem; line-height: 1.5;">Before entering your birthday surprise area, answer this simple question to verify it's you:</p>
-            <h3 style="margin-bottom: 20px; color: #4a3b3d;">When did we kiss for the first time? 💋</h3>
+        <div class="royal-card">
+            <div class="crown-icon"><i class="fa-solid fa-crown"></i></div>
+            <h1 class="royal-title">HAPPY BIRTHDAY, MY QUEEN TAMANNA! 👑</h1>
+            <p class="royal-subtitle">Welcome to your kingdom of love...</p>
+            
+            <div class="quiz-prompt">
+                Provide your Royal Password to enter:<br>
+                <span style="font-size: 1.25rem; color: var(--rose-crimson); margin-top: 5px; display: inline-block;">When did we kiss for the first time? 💋</span>
+            </div>
+            
             <button class="quiz-btn" onclick="wrongAnswer()">12th August 2025</button>
             <button class="quiz-btn" onclick="correctAnswer()">17th October 2025 ❤️</button>
             <button class="quiz-btn" onclick="wrongAnswer()">24th November 2025</button>
         </div>
     </div>
-
-    <canvas id="canvas"></canvas>
 
     <div class="music-control" onclick="toggleMusic()" id="musicBtn">
         <i class="fa-solid fa-cake-candles"></i>
@@ -332,9 +386,13 @@
 
         function wrongAnswer() { alert("Wrong choice, Motu! How can you forget the date of our first kiss? Try again! 😂❤️"); }
         function correctAnswer() {
-            alert("Correct Answer, Baccha! Welcome to your page. 🥰");
-            document.getElementById("quizOverlay").style.display = "none";
-            toggleMusic();
+            triggerConfettiBurst(); // Initial overlay explosion
+            setTimeout(() => {
+                alert("Correct Answer, Your Majesty! Welcome to your special place. 🥰👑");
+                document.getElementById("quizOverlay").style.display = "none";
+                toggleMusic();
+                triggerConfettiBurst(); // Main page entry explosion
+            }, 300);
         }
 
         function revealReason(element, message) {
@@ -394,8 +452,8 @@
             }
         }
         function spawnAmbientElements() { if(activeParticles.length > 70) return; const size = Math.random() * 10 + 6; const targetX = Math.random() * canvas.width; activeParticles.push(new ElegantParticle(targetX, -20, size, (Math.random() - 0.5) * 1.5, Math.random() * 1 + 1, Math.floor(Math.random() * 2), Math.random() * 0.6 + 0.4)); }
-        setInterval(spawnAmbientElements, 350);
-        function triggerConfettiBurst() { for (let i = 0; i < 60; i++) { const size = Math.random() * 12 + 6; const midX = canvas.width / 2; const midY = canvas.height / 2 + 100; activeParticles.push(new ElegantParticle(midX, midY, size, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 10 - 4, Math.floor(Math.random() * 2), 1)); } }
+        setInterval(spawnAmbientElements, 250); // Increased frequency slightly for a richer flow
+        function triggerConfettiBurst() { for (let i = 0; i < 75; i++) { const size = Math.random() * 12 + 6; const midX = canvas.width / 2; const midY = canvas.height / 2; activeParticles.push(new ElegantParticle(midX, midY, size, (Math.random() - 0.5) * 12, (Math.random() - 0.5) * 12 - 3, Math.floor(Math.random() * 2), 1)); } }
         function renderFrame() { ctx.clearRect(0, 0, canvas.width, canvas.height); activeParticles = activeParticles.filter(p => p.alpha > 0.01 && p.y < canvas.height + 40); activeParticles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(renderFrame); }
         renderFrame();
     </script>
