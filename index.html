@@ -12,7 +12,7 @@
             --soft-cream: #fff5f6;
             --text-dark: #2c1a1d;
             --pastel-heart: #ffe3e7;
-            --royal-gold: #d4af37;
+            --royal-gold: #ffd700;
         }
 
         * {
@@ -29,7 +29,6 @@
             text-align: center;
         }
 
-        /* Canvas brought to the very top background layer */
         #canvas {
             position: fixed;
             top: 0;
@@ -40,94 +39,81 @@
             pointer-events: none;
         }
 
-        /* --- GRAND ROYAL ENTRY GATEWAY OVERLAY --- */
+        /* --- STUNNING FULL-SCREEN OVERLAY --- */
         #quizOverlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #1c0206 0%, #3d0811 100%);
+            background: linear-gradient(135deg, #120104 0%, #2b020a 50%, #470412 100%);
             z-index: 2000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 24px;
+        }
+
+        .royal-wrapper {
+            max-width: 500px;
+            width: 100%;
+            z-index: 2002;
             padding: 20px;
         }
 
-        .royal-card {
-            background: rgba(255, 245, 246, 0.95);
-            padding: 50px 35px;
-            border-radius: 30px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(212, 175, 55, 0.4);
-            max-width: 480px;
-            width: 100%;
-            border: 3px double var(--royal-gold);
-            position: relative;
-            z-index: 2002;
-            animation: cardFloat 3s ease-in-out infinite alternate;
-        }
-
         .crown-icon {
-            font-size: 3.5rem;
+            font-size: 4rem;
             color: var(--royal-gold);
-            margin-bottom: 15px;
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
-            animation: crownPulse 2s infinite alternate;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.7));
+            animation: crownFloat 2s ease-in-out infinite alternate;
         }
 
         .royal-title {
-            font-size: 2rem;
-            color: var(--rose-crimson);
-            margin-bottom: 5px;
-            letter-spacing: 1px;
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
             font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            text-shadow: 0 0 10px rgba(255,255,255,0.3), 0 0 20px var(--rose-pink);
         }
 
-        .royal-subtitle {
-            font-size: 1.1rem;
-            color: #614045;
-            font-style: italic;
-            margin-bottom: 30px;
+        .queen-name {
+            color: var(--royal-gold);
+            display: block;
+            font-size: 2.6rem;
+            margin-top: 5px;
+            letter-spacing: 3px;
+            animation: textGlow 1.5s ease-in-out infinite alternate;
         }
 
-        .quiz-prompt {
-            font-size: 1.15rem;
-            font-weight: bold;
-            color: var(--text-dark);
-            margin-bottom: 20px;
-            line-height: 1.5;
-            border-top: 1px dashed var(--royal-gold);
-            border-bottom: 1px dashed var(--royal-gold);
-            padding: 15px 0;
-        }
+        .royal-subtitle { font-size: 1.2rem; color: #ffb3c1; font-style: italic; margin-bottom: 40px; }
+        .quiz-prompt { font-size: 1.3rem; color: #ffffff; margin-bottom: 30px; line-height: 1.6; }
 
         .quiz-btn {
-            background: white;
-            border: 2px solid var(--rose-pink);
-            color: var(--text-dark);
-            padding: 14px 22px;
-            margin: 12px 0;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            padding: 16px 25px;
+            margin: 15px 0;
             width: 100%;
             border-radius: 50px;
             cursor: pointer;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .quiz-btn:hover {
             background: linear-gradient(135deg, var(--rose-crimson), var(--rose-pink));
-            color: white;
             border-color: transparent;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(168, 35, 60, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(168, 35, 60, 0.5);
         }
 
-        /* Particles cursor trail tracking */
         .cursor-sparkle {
             position: fixed;
             pointer-events: none;
@@ -137,7 +123,6 @@
             animation: particleFade 1s forwards ease-out;
         }
 
-        /* Music Layer Control */
         .music-control {
             position: fixed;
             top: 20px;
@@ -150,7 +135,6 @@
             z-index: 100;
             color: var(--rose-crimson);
             font-size: 1.2rem;
-            transition: transform 0.3s;
         }
         .music-control.playing { animation: spin 4s linear infinite; }
 
@@ -158,73 +142,35 @@
         h1 { color: var(--rose-crimson); font-size: 2.5rem; margin-bottom: 10px; }
         .nickname-banner { font-style: italic; color: #614045; font-size: 1.1rem; margin-bottom: 25px; }
 
-        /* Countdown */
-        .countdown-wrapper {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            max-width: 450px;
-            margin: 0 auto 40px;
-        }
-        .time-card {
-            background: white;
-            padding: 15px 10px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(168, 35, 60, 0.08);
-            flex: 1;
-            border-bottom: 4px solid var(--rose-crimson);
-        }
+        .countdown-wrapper { display: flex; justify-content: center; gap: 12px; max-width: 450px; margin: 0 auto 40px; }
+        .time-card { background: white; padding: 15px 10px; border-radius: 15px; box-shadow: 0 8px 20px rgba(168, 35, 60, 0.08); flex: 1; border-bottom: 4px solid var(--rose-crimson); }
         .time-card span { display: block; font-size: 1.8rem; font-weight: bold; color: var(--rose-crimson); }
         .time-card label { font-size: 0.75rem; text-transform: uppercase; color: #8c7679; }
 
-        /* Journey Milestones counters */
-        .milestone-section {
-            background: white;
-            max-width: 650px;
-            margin: 20px auto 40px;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(168, 35, 60, 0.04);
-        }
+        .milestone-section { background: white; max-width: 650px; margin: 20px auto 40px; padding: 25px; border-radius: 20px; box-shadow: 0 8px 25px rgba(168, 35, 60, 0.04); }
         .milestone-grid { display: flex; justify-content: space-around; margin-top: 15px; }
         .milestone-item h4 { font-size: 1.6rem; color: var(--rose-crimson); }
         .milestone-item p { font-size: 0.85rem; color: #7a6366; }
 
-        /* Polaroid layout architecture */
-        .gallery-container {
-            padding: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 1000px; margin: 0 auto 50px;
-        }
-        .polaroid {
-            background: white; padding: 15px 15px 30px 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            transform: rotate(var(--angle)); transition: transform 0.4s, box-shadow 0.4s; width: 280px; border-radius: 2px;
-        }
+        .gallery-container { padding: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 1000px; margin: 0 auto 50px; }
+        .polaroid { background: white; padding: 15px 15px 30px 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); transform: rotate(var(--angle)); transition: transform 0.4s, box-shadow 0.4s; width: 280px; border-radius: 2px; }
         .polaroid:hover { transform: scale(1.05) rotate(0deg); box-shadow: 0 15px 35px rgba(168, 35, 60, 0.15); z-index: 10; }
         .polaroid img { width: 100%; height: 320px; object-fit: cover; border: 1px solid #eee; }
         .polaroid .caption { margin-top: 15px; font-size: 1.1rem; color: #4a3b3d; }
 
-        /* Heart Notes Structure */
         .reasons-title { color: var(--rose-crimson); margin: 40px 0 15px; font-size: 1.6rem; }
         .reasons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; max-width: 650px; margin: 0 auto 50px; padding: 0 20px; }
-        .reason-heart-card {
-            background: white; border-radius: 15px; padding: 20px 15px; cursor: pointer; box-shadow: 0 6px 15px rgba(168, 35, 60, 0.05);
-            transition: transform 0.4s, background-color 0.3s; border: 1px solid var(--pastel-heart); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 140px;
-        }
+        .reason-heart-card { background: white; border-radius: 15px; padding: 20px 15px; cursor: pointer; box-shadow: 0 6px 15px rgba(168, 35, 60, 0.05); transition: transform 0.4s, background-color 0.3s; border: 1px solid var(--pastel-heart); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 140px; }
         .reason-heart-card i { color: var(--rose-pink); font-size: 1.5rem; margin-bottom: 8px; }
         .reason-text { font-size: 0.95rem; color: #555; font-weight: bold; line-height: 1.4; }
 
-        /* Love Journey Map Timeline */
         .timeline-container { max-width: 550px; margin: 40px auto; padding: 0 20px; text-align: left; position: relative; }
-        .timeline-container::before {
-            content: ''; position: absolute; left: 30px; top: 10px; bottom: 10px; width: 3px; background: var(--pastel-heart);
-        }
+        .timeline-container::before { content: ''; position: absolute; left: 30px; top: 10px; bottom: 10px; width: 3px; background: var(--pastel-heart); }
         .timeline-item { position: relative; margin-bottom: 35px; padding-left: 50px; }
-        .timeline-dot {
-            position: absolute; left: 22px; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: var(--rose-pink); border: 3px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.1);
-        }
+        .timeline-dot { position: absolute; left: 22px; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: var(--rose-pink); border: 3px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
         .timeline-content h4 { color: var(--rose-crimson); font-size: 1.1rem; margin-bottom: 5px; }
         .timeline-content p { color: #555; font-size: 0.95rem; line-height: 1.5; }
 
-        /* Interactive Cake System styling */
         .cake-section { background: white; max-width: 550px; margin: 40px auto; padding: 40px 20px; border-radius: 24px; box-shadow: 0 10px 30px rgba(168, 35, 60, 0.06); border: 1px solid #ffe3e7; position: relative; }
         .cake-container { position: relative; width: 120px; height: 120px; margin: 0 auto 20px; cursor: pointer; }
         .candle { position: absolute; bottom: 70px; left: 50%; transform: translateX(-50%); width: 8px; height: 40px; background: linear-gradient(to top, #ff758c, #ff758c 50%, #fff 50%, #fff); background-size: 100% 20px; border-radius: 4px; }
@@ -232,7 +178,6 @@
         .cake-base { position: absolute; bottom: 10px; left: 10px; width: 100px; height: 60px; background: #f4a261; border-radius: 10px 10px 4px 4px; }
         .cake-base::after { content: ''; position: absolute; top: 15px; left: 0; width: 100%; height: 15px; background: var(--rose-crimson); }
 
-        /* Cartoon Scenes */
         .cartoon-scene { display: none; width: 100%; height: 200px; position: relative; margin-top: 20px; overflow: hidden; }
         .character { position: absolute; bottom: 10px; width: 80px; height: 130px; transition: all 0.5s ease; }
         .char-ajay { left: 15%; } .char-tamanna { right: 15%; }
@@ -241,12 +186,68 @@
         .feeding-slice { position: absolute; width: 25px; height: 20px; background: #f4a261; border-top: 5px solid var(--rose-crimson); clip-path: polygon(0% 100%, 100% 100%, 50% 0%); left: 30%; bottom: 60px; display: none; z-index: 5; }
         .action-btn { display: none; background: var(--rose-crimson); color: white; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; font-weight: bold; margin: 20px auto 0; box-shadow: 0 4px 10px rgba(168, 35, 60, 0.3); font-size: 1rem; }
 
-        /* Grand Letter Box Layout */
-        .letter-card { display: none; max-width: 500px; background: #fffdfd; margin: 30px auto 60px; padding: 40px 30px; border-radius: 20px; border-left: 5px solid var(--rose-crimson); box-shadow: 0 12px 40px rgba(0,0,0,0.06); text-align: left; line-height: 1.8; font-size: 1.1rem; animation: unfold 1.2s ease-out forwards; }
+        .letter-card { display: none; max-width: 500px; background: #fffdfd; margin: 30px auto 40px; padding: 40px 30px; border-radius: 20px; border-left: 5px solid var(--rose-crimson); box-shadow: 0 12px 40px rgba(0,0,0,0.06); text-align: left; line-height: 1.8; font-size: 1.1rem; animation: unfold 1.2s ease-out forwards; }
 
-        /* Entry Keyframe Animations */
-        @keyframes cardFloat { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
-        @keyframes crownPulse { 0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(212,175,55,0.4)); } 100% { transform: scale(1.08); filter: drop-shadow(0 0 15px rgba(212,175,55,0.8)); } }
+        /* --- SMART PHONE FIXED RUNAWAY BOX --- */
+        .proposal-section {
+            display: none;
+            background: white;
+            max-width: 550px;
+            margin: 30px auto 80px;
+            padding: 40px 25px;
+            border-radius: 24px;
+            box-shadow: 0 10px 35px rgba(168, 35, 60, 0.1);
+            border: 2px dashed var(--rose-pink);
+        }
+
+        .proposal-ring {
+            font-size: 3.5rem;
+            color: var(--royal-gold);
+            margin-bottom: 15px;
+            animation: crownFloat 2s ease-in-out infinite alternate;
+        }
+
+        /* Safe bounded track for clean mobile button movement */
+        .proposal-btn-container {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            margin-top: 25px;
+            background: rgba(255, 245, 246, 0.5);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .runaway-yes-btn {
+            position: absolute;
+            top: 60px;
+            left: calc(50% - 70px);
+            width: 140px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--rose-crimson), var(--rose-pink));
+            color: white;
+            border: none;
+            font-size: 1.15rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(168, 35, 60, 0.3);
+            transition: all 0.2s ease-out;
+            z-index: 10;
+        }
+
+        /* Playful real-time text banter beneath the container */
+        .mobile-banter-text {
+            margin-top: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--rose-crimson);
+            min-height: 24px;
+            font-style: italic;
+        }
+
+        @keyframes crownFloat { 0% { transform: translateY(0); } 100% { transform: translateY(-8px); } }
+        @keyframes textGlow { 0% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px var(--rose-pink); } 100% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.9), 0 0 40px var(--rose-pink), 0 0 10px #ffffff; } }
         @keyframes flicker { 0% { transform: translateX(-50%) scale(1); } 100% { transform: translateX(-50%) scale(1.1) rotate(3deg); } }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes unfold { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -254,8 +255,8 @@
         @keyframes particleFade { 0% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-20px) scale(0.6); } }
 
         @media (max-width: 480px) {
-            h1 { font-size: 2rem; } .polaroid { width: 90%; } .milestone-grid { flex-direction: column; gap: 15px; }
-            .royal-card { padding: 35px 20px; } .royal-title { font-size: 1.6rem; }
+            h1 { font-size: 1.8rem; } .polaroid { width: 90%; } .milestone-grid { flex-direction: column; gap: 15px; }
+            .royal-title { font-size: 1.6rem; } .queen-name { font-size: 2.1rem; } .quiz-prompt { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -264,15 +265,15 @@
     <canvas id="canvas"></canvas>
 
     <div id="quizOverlay">
-        <div class="royal-card">
+        <div class="royal-wrapper">
             <div class="crown-icon"><i class="fa-solid fa-crown"></i></div>
-            <h1 class="royal-title">HAPPY BIRTHDAY, MY QUEEN TAMANNA! 👑</h1>
+            <h1 class="royal-title">Happy Birthday, <span class="queen-name">Tamanna</span></h1>
             <p class="royal-subtitle">Welcome to your kingdom of love...</p>
             
-            <div class="quiz-prompt">
-                Provide your Royal Password to enter:<br>
-                <span style="font-size: 1.25rem; color: var(--rose-crimson); margin-top: 5px; display: inline-block;">When did we kiss for the first time? 💋</span>
-            </div>
+            <p class="quiz-prompt">
+                Unlock your special day with your secret password:<br>
+                <span style="font-size: 1.25rem; color: #ffb3c1; font-weight: bold; margin-top: 8px; display: inline-block;">When did we kiss for the first time? 💋</span>
+            </p>
             
             <button class="quiz-btn" onclick="wrongAnswer()">12th August 2025</button>
             <button class="quiz-btn" onclick="correctAnswer()">17th October 2025 ❤️</button>
@@ -369,12 +370,24 @@
         <p>Happy Birthday to the girl who holds my entire heart! 💞🎂</p>
         <p>Looking back at <strong>October 17, 2025</strong>, I never could have imagined how deeply you would weave yourself into my life. That was the exact day I started having an undeniable crush on you—a spark so beautiful and real that it led us straight to our very first kiss. From that moment on, you became my baccha, my cutiepie, my motu, and my mogli.</p>
         <p>Thank you for an incredible year of shared smiles, late-night talks, ocean waves, and unwavering warmth. Thank you for simply being you. You are stunningly beautiful, but your kind soul is what makes you truly irreplaceable.</p>
-        <p>On your special day, I don't just wish you happiness—I promise to build a life of it with you. May this year bring you closer to every dream you harbor, and may your gorgeous smile never fade. I love you so much, and I am right here by your side through everything life brings our way.</p><br>
+        <p>On your special day, I don't just wish you happiness—I promise to build a life of it with you. May this year bring you countless beautiful moments and wonderful new memories.</p><br>
         <p style="text-align: right;"><strong>With all my love, forever and always,</strong><br>Ajay Bathani 💝</p>
+    </div>
+
+    <div class="proposal-section" id="marryMeSection">
+        <div class="proposal-ring"><i class="fa-solid fa-ring"></i></div>
+        <h2 id="proposalText" style="color: var(--rose-crimson); line-height: 1.5;">Tamanna Nainani,<br>Will you make me the happiest man alive? 💖</h2>
+        <p style="font-size: 0.9rem; color: #8c7679; margin-top: 5px;">Will you marry me?</p>
+        
+        <div class="proposal-btn-container" id="btnBox">
+            <button class="runaway-yes-btn" id="marryYesBtn" onclick="attemptClick()">YES! 💍</button>
+        </div>
+        <p class="mobile-banter-text" id="banterBox"></p>
     </div>
 
     <script>
         const targetBirthday = new Date("June 12, 2026 00:00:00").getTime();
+        let currentEscapes = 0;
 
         function runCountdown() {
             const rightNow = new Date().getTime(); const gap = targetBirthday - rightNow;
@@ -386,20 +399,57 @@
 
         function wrongAnswer() { alert("Wrong choice, Motu! How can you forget the date of our first kiss? Try again! 😂❤️"); }
         function correctAnswer() {
-            triggerConfettiBurst(); // Initial overlay explosion
+            triggerGrandFireworkShow();
             setTimeout(() => {
                 alert("Correct Answer, Your Majesty! Welcome to your special place. 🥰👑");
                 document.getElementById("quizOverlay").style.display = "none";
                 toggleMusic();
-                triggerConfettiBurst(); // Main page entry explosion
-            }, 300);
+                triggerGrandFireworkShow();
+            }, 400);
+        }
+
+        // --- FIXED MOBILE LOGIC FOR CLEAN RUNAWAY TELEPORTATION ---
+        function attemptClick() {
+            const btn = document.getElementById("marryYesBtn");
+            const container = document.getElementById("btnBox");
+            const banter = document.getElementById("banterBox");
+
+            if (currentEscapes < 3) {
+                // Instantly move button locations inside container boundaries
+                const maxX = container.clientWidth - btn.clientWidth;
+                const maxY = container.clientHeight - btn.clientHeight;
+
+                const targetX = Math.floor(Math.random() * (maxX - 10)) + 5;
+                const targetY = Math.floor(Math.random() * (maxY - 10)) + 5;
+
+                btn.style.left = `${targetX}px`;
+                btn.style.top = `${targetY}px`;
+
+                currentEscapes++;
+
+                // Inline real-time text descriptions instead of aggressive popups
+                if (currentEscapes === 1) banter.innerText = "Ah, running away, Mogli? Try catching it again! 😂";
+                if (currentEscapes === 2) banter.innerText = "No shortcuts, Motu! You have to catch your ring! 🏃‍♂️💨";
+                if (currentEscapes === 3) {
+                    banter.innerText = "Okay, locking it in place for my Baccha now! Click it! ❤️";
+                    // Lock button center safely so the next tap registers successfully
+                    btn.style.left = `calc(50% - ${btn.clientWidth / 2}px)`;
+                    btn.style.top = `calc(50% - ${btn.clientHeight / 2}px)`;
+                }
+            } else {
+                // Success execution triggers when currentEscapes reaches 3
+                document.getElementById("proposalText").innerHTML = "SHE SAID YES! 🎉❤️<br><span style='color: var(--royal-gold); font-size: 1.5rem;'>My absolute Queen forever and always!</span>";
+                btn.style.display = "none";
+                banter.style.display = "none";
+                setInterval(triggerGrandFireworkShow, 800);
+            }
         }
 
         function revealReason(element, message) {
             element.style.transform = "rotateY(360deg)"; element.style.backgroundColor = "#fff0f2";
             const icon = element.querySelector('i'); icon.className = "fa-solid fa-heart-crack"; icon.style.transform = "scale(1.2)";
             const label = element.querySelector('.reason-text'); label.innerText = message; label.style.fontSize = "0.8rem";
-            triggerConfettiBurst();
+            triggerFireworkAt(Math.random() * canvas.width, Math.random() * canvas.height / 2);
         }
 
         window.addEventListener('mousemove', function(e) {
@@ -426,7 +476,7 @@
         function blowCandle() {
             const flame = document.getElementById("cakeFlame");
             if(flame.style.display !== "none") {
-                flame.style.display = "none"; triggerConfettiBurst();
+                flame.style.display = "none"; triggerGrandFireworkShow();
                 setTimeout(() => { document.getElementById("cakePrompt").style.display = "none"; document.getElementById("cartoonStage").style.display = "block"; document.getElementById("feedBtn").style.display = "block"; document.getElementById("cakeSlice").style.display = "block"; }, 600);
             }
         }
@@ -434,28 +484,84 @@
         function feedCakeAction() {
             const slice = document.getElementById("cakeSlice"); const tamanna = document.getElementById("tamannaChar"); const feedButton = document.getElementById("feedBtn");
             slice.style.animation = "feedAction 1.5s forwards ease-in-out";
-            setTimeout(() => { tamanna.style.transform = "scale(1.2)"; triggerConfettiBurst(); }, 750);
-            setTimeout(() => { tamanna.style.transform = "scale(1)"; feedButton.style.display = "none"; document.getElementById("loveLetter").style.display = "block"; document.getElementById("loveLetter").scrollIntoView({ behavior: 'smooth' }); }, 1600);
+            setTimeout(() => { tamanna.style.transform = "scale(1.2)"; triggerGrandFireworkShow(); }, 750);
+            setTimeout(() => { 
+                tamanna.style.transform = "scale(1)"; 
+                feedButton.style.display = "none"; 
+                document.getElementById("loveLetter").style.display = "block"; 
+                document.getElementById("marryMeSection").style.display = "block"; 
+                document.getElementById("loveLetter").scrollIntoView({ behavior: 'smooth' }); 
+            }, 1600);
         }
 
-        const canvas = document.getElementById("canvas"); const ctx = canvas.getContext("2d"); let activeParticles = [];
+        // --- CANVAS ENGINE (FLOWER PETALS & FIRECRACKERS) ---
+        const canvas = document.getElementById("canvas"); const ctx = canvas.getContext("2d"); 
+        let particles = [];
+        const fireworkColors = ["#ffd700", "#ff4a75", "#00f0ff", "#ff00ff", "#00ff66", "#ffffff", "#ff9d00"];
+
         function resizeStage() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         window.addEventListener("resize", resizeStage); resizeStage();
 
-        class ElegantParticle {
-            constructor(x, y, scale, speedX, speedY, type, alpha) { this.x = x; this.y = y; this.scale = scale; this.speedX = speedX; this.speedY = speedY; this.type = type; this.alpha = alpha; this.rotation = Math.random() * 360; this.rotSpeed = (Math.random() - 0.5) * 2; }
-            update() { this.x += this.speedX; this.y += this.speedY; this.rotation += this.rotSpeed; if (this.alpha > 0.008) this.alpha -= 0.003; }
+        class WebParticle {
+            constructor(x, y, size, speedX, speedY, mode, color, alpha) {
+                this.x = x; this.y = y; this.size = size; this.speedX = speedX; this.speedY = speedY;
+                this.mode = mode; this.color = color; this.alpha = alpha;
+                this.rotation = Math.random() * 360; this.rotSpeed = (Math.random() - 0.5) * 2;
+                this.gravity = mode === 2 ? 0.08 : 0;
+            }
+            update() {
+                this.speedY += this.gravity; this.x += this.speedX; this.y += this.speedY; this.rotation += this.rotSpeed;
+                if(this.mode === 2) { this.alpha -= 0.015; } else { if (this.alpha > 0.008) this.alpha -= 0.003; }
+            }
             draw() {
-                ctx.save(); ctx.globalAlpha = this.alpha; ctx.translate(this.x, this.y); ctx.rotate((this.rotation * Math.PI) / 180); ctx.fillStyle = this.type === 0 ? "#a8233c" : "#ff758c"; ctx.beginPath();
-                if(this.type === 0) { ctx.ellipse(0, 0, this.scale, this.scale * 1.4, 0, 0, 2 * Math.PI); ctx.fill(); } else { ctx.moveTo(0, 0 + this.scale / 4); ctx.quadraticCurveTo(0, 0, 0 + this.scale / 2, 0); ctx.quadraticCurveTo(0 + this.scale, 0, 0 + this.scale, 0 + this.scale / 4); ctx.quadraticCurveTo(0 + this.scale, 0 + (this.scale * 5) / 8, 0 + this.scale / 2, 0 + this.scale); ctx.quadraticCurveTo(0, 0 + (this.scale * 5) / 8, 0, 0 + this.scale / 4); ctx.closePath(); ctx.fill(); }
+                ctx.save(); ctx.globalAlpha = this.alpha; ctx.translate(this.x, this.y);
+                if(this.mode !== 2) ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.fillStyle = this.color; ctx.beginPath();
+                if(this.mode === 0) { ctx.ellipse(0, 0, this.size, this.size * 1.4, 0, 0, 2 * Math.PI); ctx.fill(); } 
+                else if(this.mode === 1) { ctx.moveTo(0, 0 + this.size / 4); ctx.quadraticCurveTo(0, 0, 0 + this.size / 2, 0); ctx.quadraticCurveTo(0 + this.size, 0, 0 + this.scale, 0 + this.size / 4); ctx.quadraticCurveTo(0 + this.size, 0 + (this.size * 5) / 8, 0 + this.size / 2, 0 + this.size); ctx.quadraticCurveTo(0, 0 + (this.size * 5) / 8, 0, 0 + this.size / 4); ctx.closePath(); ctx.fill(); } 
+                else if(this.mode === 2) { ctx.arc(0, 0, this.size, 0, Math.PI * 2); ctx.fill(); }
                 ctx.restore();
             }
         }
-        function spawnAmbientElements() { if(activeParticles.length > 70) return; const size = Math.random() * 10 + 6; const targetX = Math.random() * canvas.width; activeParticles.push(new ElegantParticle(targetX, -20, size, (Math.random() - 0.5) * 1.5, Math.random() * 1 + 1, Math.floor(Math.random() * 2), Math.random() * 0.6 + 0.4)); }
-        setInterval(spawnAmbientElements, 250); // Increased frequency slightly for a richer flow
-        function triggerConfettiBurst() { for (let i = 0; i < 75; i++) { const size = Math.random() * 12 + 6; const midX = canvas.width / 2; const midY = canvas.height / 2; activeParticles.push(new ElegantParticle(midX, midY, size, (Math.random() - 0.5) * 12, (Math.random() - 0.5) * 12 - 3, Math.floor(Math.random() * 2), 1)); } }
-        function renderFrame() { ctx.clearRect(0, 0, canvas.width, canvas.height); activeParticles = activeParticles.filter(p => p.alpha > 0.01 && p.y < canvas.height + 40); activeParticles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(renderFrame); }
-        renderFrame();
+
+        function spawnAmbientFlow() {
+            if(particles.filter(p => p.mode !== 2).length > 60) return;
+            const size = Math.random() * 10 + 6; const targetX = Math.random() * canvas.width;
+            const type = Math.floor(Math.random() * 2);
+            const color = type === 0 ? "#a8233c" : "#ff758c";
+            particles.push(new WebParticle(targetX, -20, size, (Math.random() - 0.5) * 1.5, Math.random() * 1 + 1, type, color, Math.random() * 0.6 + 0.4));
+        }
+        setInterval(spawnAmbientFlow, 350);
+
+        function triggerFireworkAt(targetX, targetY) {
+            const totalSparks = 60; const chosenColor = fireworkColors[Math.floor(Math.random() * fireworkColors.length)];
+            for(let i=0; i < totalSparks; i++) {
+                const angle = (Math.PI * 2 / totalSparks) * i; const velocity = Math.random() * 5 + 2;
+                const speedX = Math.cos(angle) * velocity + (Math.random() - 0.5) * 1;
+                const speedY = Math.sin(angle) * velocity + (Math.random() - 0.5) * 1;
+                particles.push(new WebParticle(targetX, targetY, Math.random() * 2.5 + 1.5, speedX, speedY, 2, chosenColor, 1));
+            }
+        }
+
+        function autoFirecrackerEngine() {
+            const randX = Math.random() * (canvas.width - 100) + 50; const randY = Math.random() * (canvas.height * 0.5) + 60;
+            triggerFireworkAt(randX, randY);
+        }
+        setInterval(autoFirecrackerEngine, 1400);
+
+        function triggerGrandFireworkShow() {
+            for(let i=0; i<5; i++) {
+                setTimeout(() => { triggerFireworkAt(Math.random() * canvas.width, Math.random() * canvas.height * 0.6); }, i * 200);
+            }
+        }
+
+        function renderScene() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles = particles.filter(p => p.alpha > 0.01 && p.y < canvas.height + 40 && p.x > -40 && p.x < canvas.width + 40);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(renderScene);
+        }
+        renderScene();
     </script>
 </body>
 </html>
