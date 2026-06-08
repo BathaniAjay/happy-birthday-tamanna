@@ -159,25 +159,25 @@
 
         /* Heart Cards Grid */
         .reasons-title { color: var(--rose-crimson); margin: 40px 0 15px; font-size: 1.6rem; }
-        .reasons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; max-width: 600px; margin: 0 auto 50px; padding: 0 20px; }
+        .reasons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; max-width: 650px; margin: 0 auto 50px; padding: 0 20px; }
         .reason-heart-card {
-            background: white; border-radius: 15px; padding: 20px 10px; cursor: pointer; box-shadow: 0 6px 15px rgba(168, 35, 60, 0.05);
-            transition: transform 0.3s, background-color 0.3s; border: 1px solid var(--pastel-heart); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 120px;
+            background: white; border-radius: 15px; padding: 20px 15px; cursor: pointer; box-shadow: 0 6px 15px rgba(168, 35, 60, 0.05);
+            transition: transform 0.4s, background-color 0.3s; border: 1px solid var(--pastel-heart); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 140px;
         }
         .reason-heart-card i { color: var(--rose-pink); font-size: 1.5rem; margin-bottom: 8px; }
-        .reason-text { font-size: 0.95rem; color: #555; font-weight: bold; }
+        .reason-text { font-size: 0.95rem; color: #555; font-weight: bold; line-height: 1.4; }
 
         /* Love Timeline */
         .timeline-container { max-width: 550px; margin: 40px auto; padding: 0 20px; text-align: left; position: relative; }
         .timeline-container::before {
             content: ''; position: absolute; left: 30px; top: 10px; bottom: 10px; width: 3px; background: var(--pastel-heart);
         }
-        .timeline-item { position: relative; margin-bottom: 30px; padding-left: 50px; }
+        .timeline-item { position: relative; margin-bottom: 35px; padding-left: 50px; }
         .timeline-dot {
             position: absolute; left: 22px; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: var(--rose-pink); border: 3px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.1);
         }
-        .timeline-content h4 { color: var(--rose-crimson); font-size: 1.1rem; margin-bottom: 3px; }
-        .timeline-content p { color: #555; font-size: 0.95rem; }
+        .timeline-content h4 { color: var(--rose-crimson); font-size: 1.1rem; margin-bottom: 5px; }
+        .timeline-content p { color: #555; font-size: 0.95rem; line-height: 1.5; }
 
         /* Cake Section */
         .cake-section { background: white; max-width: 550px; margin: 40px auto; padding: 40px 20px; border-radius: 24px; box-shadow: 0 10px 30px rgba(168, 35, 60, 0.06); border: 1px solid #ffe3e7; position: relative; }
@@ -262,24 +262,33 @@
 
     <h3 class="reasons-title">Tap each heart, Baccha... 👇</h3>
     <div class="reasons-grid">
-        <div class="reason-heart-card" onclick="revealReason(this, 'Your absolute cuteness that brightens my entire day!')"><i class="fa-solid fa-heart"></i><span class="reason-text">Reason 1</span></div>
-        <div class="reason-heart-card" onclick="revealReason(this, 'How unbelievably beautiful you look every single moment.')"><i class="fa-solid fa-heart"></i><span class="reason-text">Reason 2</span></div>
-        <div class="reason-heart-card" onclick="revealReason(this, 'The infinite fun and pure comfort I feel when you are around me.')"><i class="fa-solid fa-heart"></i><span class="reason-text">Reason 3</span></div>
+        <div class="reason-heart-card" onclick="revealReason(this, 'Your absolute cuteness that brightens my entire day! It makes all my stress vanish the second you smile.')"><i class="fa-solid fa-heart"></i><span class="reason-text">Reason 1</span></div>
+        <div class="reason-heart-card" onclick="revealReason(this, 'How unbelievably beautiful you look every single moment. You are stunning both inside and out.')"><i class="fa-solid fa-heart"></i><span class="reason-text">Reason 2</span></div>
+        <div class="reason-heart-card" onclick="revealReason(this, 'The infinite fun and pure comfort I feel when you are around me. Life is just better with you.')"><i class="fa-solid fa-heart"></i><span class="reason-text">Reason 3</span></div>
     </div>
 
     <div class="timeline-container">
         <h3 style="color: var(--rose-crimson); text-align: center; margin-bottom: 25px;">Our Journey Highlights ✨</h3>
         <div class="timeline-item">
             <div class="timeline-dot"></div>
-            <div class="timeline-content"><h4>The First Hello 👋</h4><p>When our beautiful 1-year journey began, adding endless sweetness to my world.</p></div>
+            <div class="timeline-content">
+                <h4>The First Hello 👋</h4>
+                <p>When my world changed completely. Over this past year, you went from being a gorgeous face in my life to becoming my absolute favorite person, my baccha.</p>
+            </div>
         </div>
         <div class="timeline-item">
             <div class="timeline-dot"></div>
-            <div class="timeline-content"><h4>Endless Inside Jokes 😂</h4><p>Nicknaming you my cutiepie, motu, and mogli, and realizing how incredibly fun life is with you.</p></div>
+            <div class="timeline-content">
+                <h4>The 17th of October Spark ⚡</h4>
+                <p>The exact day everything locked into place. I started having the biggest, deepest crush on you—a feeling so strong it eventually gave me the courage to pull you close and kiss you for the first time.</p>
+            </div>
         </div>
         <div class="timeline-item">
             <div class="timeline-dot"></div>
-            <div class="timeline-content"><h4>Chasing Sunsets Together 🌊</h4><p>Standing side-by-side watching the sun slide down over the water, holding you close.</p></div>
+            <div class="timeline-content">
+                <h4>Our Safe Place 🌊</h4>
+                <p>Nicknaming you my motu, teasing you constantly, but secretly knowing that holding you tight while watching the sunset by the beach is the safest, happiest place I will ever find.</p>
+            </div>
         </div>
     </div>
 
@@ -302,12 +311,12 @@
     </div>
 
     <div class="letter-card" id="loveLetter">
-        <p><strong>Dear Tamanna Nainani,</strong></p><br>
-        <p>Happy Birthday to the Love of my Life! 💞🎂</p>
-        <p>You are my <em>baccha</em>, <em>cutiepie</em>, <em>motu</em>, and <em>mogli</em>, and I am so deeply grateful to have you in my life. Being around you brings out all the fun, joy, and laughter in my world. You are so beautiful, both inside and out.</p>
-        <p>You bring an irreplaceable warmth and sweetness into my life. Every single moment shared with you over this past year has become precious to me.</p>
-        <p>On your special day, I wish you all the happiness, love, and joy that you truly deserve. May this coming year bring you countless beautiful moments and wonderful new memories.</p><br>
-        <p style="text-align: right;"><strong>With love and best wishes,</strong><br>Ajay Bathani 💝</p>
+        <p><strong>Dear Tamanna,</strong></p><br>
+        <p>Happy Birthday to the girl who holds my entire heart! 💞🎂</p>
+        <p>Looking back at <strong>October 17, 2025</strong>, I never could have imagined how deeply you would weave yourself into my life. That was the exact day I started having an undeniable crush on you—a spark so beautiful and real that it led us straight to our very first kiss. From that moment on, you became my baccha, my cutiepie, my motu, and my mogli.</p>
+        <p>Thank you for an incredible year of shared smiles, late-night talks, ocean waves, and unwavering warmth. Thank you for simply being you. You are stunningly beautiful, but your kind soul is what makes you truly irreplaceable.</p>
+        <p>On your special day, I don't just wish you happiness—I promise to build a life of it with you. May this year bring you closer to every dream you harbor, and may your gorgeous smile never fade. I love you so much, and I am right here by your side through everything life brings our way.</p><br>
+        <p style="text-align: right;"><strong>With all my love, forever and always,</strong><br>Ajay Bathani 💝</p>
     </div>
 
     <script>
@@ -321,12 +330,11 @@
         }
         setInterval(runCountdown, 1000);
 
-        // Quiz Logic
         function wrongAnswer() { alert("Wrong choice, Motu! How can you forget the date of our first kiss? Try again! 😂❤️"); }
         function correctAnswer() {
             alert("Correct Answer, Baccha! Welcome to your page. 🥰");
             document.getElementById("quizOverlay").style.display = "none";
-            toggleMusic(); // Autoplays romantic music on validation!
+            toggleMusic();
         }
 
         function revealReason(element, message) {
@@ -344,7 +352,6 @@
             }
         });
 
-        // Touch trail addition for mobile devices
         window.addEventListener('touchmove', function(e) {
             if(Math.random() > 0.85) {
                 const sparkle = document.createElement('div'); sparkle.className = 'cursor-sparkle'; sparkle.innerHTML = '❤️';
@@ -373,7 +380,6 @@
             setTimeout(() => { tamanna.style.transform = "scale(1)"; feedButton.style.display = "none"; document.getElementById("loveLetter").style.display = "block"; document.getElementById("loveLetter").scrollIntoView({ behavior: 'smooth' }); }, 1600);
         }
 
-        // Particle Canvas
         const canvas = document.getElementById("canvas"); const ctx = canvas.getContext("2d"); let activeParticles = [];
         function resizeStage() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         window.addEventListener("resize", resizeStage); resizeStage();
